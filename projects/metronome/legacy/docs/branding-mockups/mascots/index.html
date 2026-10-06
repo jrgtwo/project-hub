@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>metronomnom — mascot concepts (eating + music)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #14110f; color: hsl(38 30% 90%); font-family: Inter, system-ui, sans-serif; min-height: 100vh; padding-bottom: 3rem; }
+  header { padding: 1.4rem 1.6rem 0.4rem; }
+  h1 { font-family: Fredoka, sans-serif; font-size: 1.3rem; font-weight: 700; }
+  p.sub { color: hsl(30 10% 62%); font-size: 0.84rem; margin-top: 0.35rem; max-width: 74ch; line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1.2rem 1.6rem; }
+  @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #1c1813; border: 1px solid #2c2620; border-radius: 16px; overflow: hidden; }
+  .name { font-family: Fredoka, sans-serif; font-weight: 600; font-size: 1.02rem; padding: 0.8rem 1rem 0.1rem; }
+  .tag { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.1em; color: hsl(38 70% 56%); padding: 0.1rem 1rem 0; }
+  .vibe { font-size: 0.78rem; color: hsl(30 10% 60%); padding: 0.3rem 1rem 0.7rem; line-height: 1.4; min-height: 3.4em; }
+  .stage { display: grid; grid-template-columns: 1fr 1fr; }
+  .pane { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.1rem 0.5rem; }
+  .pane.light { background: hsl(38 34% 85%); }
+  .pane.dark { background: hsl(26 16% 13%); }
+  .pane .big { width: 96px; height: 96px; }
+  .markrow { display: flex; align-items: center; gap: 0.5rem; }
+  .markrow .mk { width: 30px; height: 30px; }
+  .markrow span { font-family: Fredoka, sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .pane.light .markrow span { color: hsl(24 32% 22%); }
+  .pane.light .markrow .nom { color: hsl(18 62% 48%); }
+  .pane.dark .markrow span { color: hsl(38 30% 90%); }
+  .pane.dark .markrow .nom { color: hsl(4 80% 64%); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>metronomnom — eating the beat, with a music wink 🎵</h1>
+    <p class="sub">Take 3: still caught mid-nom, but now each carries a music/theory cue — a note for a body, an actual metronome, notes on a staff, or notes as the food. Shown big on both themes + a small mark by the wordmark. Pick one (or mix) and I'll polish it into a matched mark + hero.</p>
+  </header>
+  <div class="grid" id="grid"></div>
+
+<script>
+  var INK = 'hsl(24 30% 18%)';
+  var AMBER = 'hsl(40 86% 58%)';
+  var AMBER_D = 'hsl(38 62% 46%)';   // darker amber — reads on BOTH bg
+  var BEAT = 'hsl(4 80% 62%)';       // food / accents — reads on both bg
+  var MID = 'hsl(30 12% 52%)';       // staff lines / stems off-body — reads on both
+  var MOUTH = 'hsl(20 40% 14%)';
+
+  // eighth-note "food" (notehead + stem)
+  function note(x, y, s, color) {
+    return `<g>
+      <ellipse cx="${x}" cy="${y}" rx="${5.4 * s}" ry="${4.3 * s}" transform="rotate(-18 ${x} ${y})" fill="${color}"/>
+      <rect x="${x + 3.7 * s}" y="${y - 15 * s}" width="${2 * s}" height="${13 * s}" rx="1" fill="${color}"/>
+    </g>`;
+  }
+  function crumb(x, y, r, c) { return `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`; }
+
+  var concepts = [
+    {
+      name: 'Note Muncher', tag: 'body = a note',
+      vibe: 'The mascot IS an eighth-note: notehead body + stem & flag, chomping a beat. Most directly "musical."',
+      svg: `
+        <rect x="65" y="16" width="5" height="46" rx="2.5" fill="${AMBER}"/>
+        <path d="M70 17 q15 5 9 21 q3 -11 -9 -13 Z" fill="${AMBER}"/>
+        <g transform="rotate(-12 44 60)"><ellipse cx="44" cy="60" rx="27" ry="22" fill="${AMBER}"/></g>
+        <path d="M28 62 Q39 79 52 64 Q39 70 28 62 Z" fill="${MOUTH}"/>
+        <circle cx="18" cy="69" r="5" fill="${BEAT}"/>${crumb(27, 58, 1.8, BEAT)}
+        <circle cx="36" cy="52" r="5.8" fill="#fff"/><circle cx="37.5" cy="53" r="2.9" fill="${INK}"/>
+        <circle cx="52" cy="50" r="5.8" fill="#fff"/><circle cx="53.5" cy="51" r="2.9" fill="${INK}"/>
+        <circle cx="31" cy="60" r="3.4" fill="${BEAT}" opacity="0.4"/>`,
+    },
+    {
+      name: 'Metronome Muncher', tag: 'is a metronome',
+      vibe: 'A wind-up metronome — pendulum and all — with a face, snacking on a beat. The most on-theme: it literally keeps time AND eats it.',
+      svg: `
+        <path d="M31 88 L43 27 L57 27 L69 88 Z" fill="${AMBER}"/>
+        <rect x="25" y="85" width="50" height="7" rx="3.5" fill="${AMBER_D}"/>
+        <line x1="50" y1="82" x2="64" y2="26" stroke="${AMBER_D}" stroke-width="3" stroke-linecap="round"/>
+        <rect x="56" y="45" width="9" height="9" rx="2" transform="rotate(14 60 49)" fill="${BEAT}"/>
+        <circle cx="44" cy="56" r="5" fill="#fff"/><circle cx="45" cy="57" r="2.5" fill="${INK}"/>
+        <circle cx="56" cy="56" r="5" fill="#fff"/><circle cx="57" cy="57" r="2.5" fill="${INK}"/>
+        <path d="M40 68 Q50 79 60 68 Q50 73 40 68 Z" fill="${MOUTH}"/>
+        ${note(50, 73, 0.7, BEAT)}
+        <circle cx="38" cy="64" r="3" fill="${BEAT}" opacity="0.4"/>`,
+    },
+    {
+      name: 'Staff Slurp', tag: 'eats off a staff',
+      vibe: 'Mouth at the head of a music staff, slurping the notes sliding along the lines. Notation is literally the meal.',
+      svg: `
+        <line x1="40" y1="40" x2="99" y2="40" stroke="${MID}" stroke-width="1.5"/>
+        <line x1="40" y1="50" x2="99" y2="50" stroke="${MID}" stroke-width="1.5"/>
+        <line x1="40" y1="60" x2="99" y2="60" stroke="${MID}" stroke-width="1.5"/>
+        <line x1="40" y1="70" x2="99" y2="70" stroke="${MID}" stroke-width="1.5"/>
+        ${note(88, 55, 0.8, BEAT)} ${note(72, 60, 0.8, BEAT)}
+        <circle cx="34" cy="54" r="27" fill="${AMBER}"/>
+        <path d="M34 54 L62 43 A27 27 0 0 1 62 65 Z" fill="${MOUTH}"/>
+        <path d="M48 56 q5 4 9 0" stroke="${BEAT}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="26" cy="46" r="6" fill="#fff"/><circle cx="28" cy="47" r="3" fill="${INK}"/>
+        <circle cx="22" cy="60" r="3.4" fill="${BEAT}" opacity="0.4"/>`,
+    },
+    {
+      name: 'Cheeks-Full', tag: 'nom nom',
+      vibe: 'Mid-chew with bulging cheeks and a note stem still poking out of a happy mouth; little notes drifting up. The literal "nom nom."',
+      svg: `
+        ${note(88, 26, 0.62, MID)} ${note(14, 30, 0.55, MID)}
+        <circle cx="50" cy="53" r="31" fill="${AMBER}"/>
+        <circle cx="24" cy="61" r="15" fill="hsl(40 90% 64%)"/>
+        <circle cx="76" cy="61" r="15" fill="hsl(40 90% 64%)"/>
+        <path d="M34 48 q6 -6 12 0" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M54 48 q6 -6 12 0" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M40 65 q10 8 20 0" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>
+        ${note(58, 53, 0.85, BEAT)}
+        <circle cx="20" cy="65" r="4" fill="${BEAT}" opacity="0.5"/>
+        <circle cx="80" cy="65" r="4" fill="${BEAT}" opacity="0.5"/>`,
+    },
+    {
+      name: 'Big Chomp', tag: 'bites a note',
+      vibe: 'Jaws open with teeth, biting a note clean in half — crumbs and a stray note flying. Boldest eating read.',
+      svg: `
+        ${note(90, 26, 0.6, BEAT)}
+        <circle cx="46" cy="53" r="34" fill="${AMBER}"/>
+        <path d="M44 53 Q66 37 88 41 Q74 53 88 65 Q66 69 44 57 Z" fill="${MOUTH}"/>
+        <path d="M58 44 l4 6 l5 -4 Z" fill="#fff"/><path d="M70 42 l4 6 l5 -4 Z" fill="#fff"/>
+        <path d="M60 63 l4 -6 l5 4 Z" fill="#fff"/>
+        ${note(80, 51, 1.0, BEAT)}
+        ${crumb(91, 40, 2.1, BEAT)}${crumb(93, 52, 1.5, AMBER)}
+        <path d="M28 45 q5 -5 11 -1" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M42 43 q5 -5 11 -1" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="29" cy="61" r="4" fill="${BEAT}" opacity="0.4"/>`,
+    },
+    {
+      name: 'Catch-the-Note', tag: 'catches a note',
+      vibe: 'Head tipped back, mouth + tongue wide, a note dropping straight in. Eager and playful.',
+      svg: `
+        <circle cx="50" cy="57" r="33" fill="${AMBER}"/>
+        <ellipse cx="50" cy="59" rx="14" ry="16" fill="${MOUTH}"/>
+        <path d="M39 65 Q50 79 61 65 Q50 72 39 65 Z" fill="${BEAT}"/>
+        <circle cx="40" cy="41" r="6.5" fill="#fff"/><circle cx="41" cy="38" r="3.2" fill="${INK}"/>
+        <circle cx="60" cy="41" r="6.5" fill="#fff"/><circle cx="61" cy="38" r="3.2" fill="${INK}"/>
+        ${note(50, 14, 0.95, BEAT)}
+        <path d="M42 28 l-3 5 M58 28 l3 5" stroke="${AMBER_D}" stroke-width="2" stroke-linecap="round" opacity="0.7"/>`,
+    },
+  ];
+
+  function svgEl(inner, cls) {
+    return `<svg class="${cls}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+  }
+  function pane(kind, inner) {
+    return `<div class="pane ${kind}">
+        ${svgEl(inner, 'big')}
+        <div class="markrow">${svgEl(inner, 'mk')}<span>metro<span class="nom">nomnom</span></span></div>
+      </div>`;
+  }
+  document.getElementById('grid').innerHTML = concepts.map(function (c, i) {
+    return `<div class="card">
+        <div class="name">${i + 1}. ${c.name}</div>
+        <div class="tag">${c.tag}</div>
+        <div class="vibe">${c.vibe}</div>
+        <div class="stage">${pane('light', c.svg)}${pane('dark', c.svg)}</div>
+      </div>`;
+  }).join('');
+</script>
+</body>
+</html>

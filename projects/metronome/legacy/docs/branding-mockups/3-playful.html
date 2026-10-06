@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>metronomnom — Direction 3: Playful Mascot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet" />
+<style>
+  /* ---- Direction 3: PLAYFUL MASCOT (lean playful) ----
+     Warm cream surface, food-ish accents, rounded type, and a visible beat-eater
+     mascot as the hero. NOTE: this palette is NOT in the lib tokens today — it
+     would need new tokens in @fretwork/lib before it can ship in-app. */
+  :root {
+    --cream: 38 44% 96%;
+    --cream-card: 38 40% 99%;
+    --ink: 20 24% 20%;
+    --ink-soft: 22 14% 46%;
+    --amber: 36 94% 56%;
+    --strawberry: 4 78% 62%;
+    --grape: 270 36% 60%;
+    --mint: 158 42% 52%;
+    --radius: 1.1rem;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: radial-gradient(120% 90% at 50% 0%, hsl(40 52% 98%), hsl(36 38% 93%)); color: hsl(var(--ink)); font-family: "Baloo 2", system-ui, sans-serif; display: flex; justify-content: center; min-height: 100%; }
+  .app { width: 100%; max-width: 32rem; min-height: 100vh; display: flex; flex-direction: column; padding: 1.5rem 1.25rem; }
+
+  header { display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .mascot-mark { width: 2rem; height: 2rem; flex: none; }
+  .wordmark { font-family: Fredoka, sans-serif; font-weight: 700; font-size: 1.4rem; color: hsl(var(--ink)); letter-spacing: -0.01em; }
+  .wordmark .nom { color: hsl(var(--strawberry)); }
+  .calibrate { display: inline-flex; align-items: center; gap: 0.4rem; background: hsl(var(--cream-card)); color: hsl(var(--ink-soft)); border: 1.5px solid hsl(36 30% 86%); border-radius: 999px; padding: 0.45rem 0.85rem; font-size: 0.74rem; font-weight: 600; cursor: pointer; box-shadow: 0 2px 0 hsl(36 30% 86%); }
+  .calibrate svg { width: 0.9rem; height: 0.9rem; }
+
+  main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem; padding: 1.5rem 0; }
+  .stage { position: relative; width: 100%; max-width: 380px; }
+  .arc { position: relative; width: 100%; }
+  .pill { position: absolute; border-radius: 999px; }
+  .readout { position: absolute; display: flex; flex-direction: column; align-items: center; z-index: 2; }
+  .bpm { font-family: Fredoka, sans-serif; font-weight: 700; font-size: 4.2rem; line-height: 1; color: hsl(var(--ink)); }
+  .bpm-label { font-family: Fredoka, sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: hsl(var(--ink-soft)); font-weight: 600; }
+  /* the beat-eater hero, mouth open toward the live beat */
+  .hero { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); width: 120px; height: 120px; z-index: 1; }
+
+  .bpmctl { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 320px; }
+  .round-sm { width: 2.6rem; height: 2.6rem; border-radius: 999px; border: none; background: hsl(var(--cream-card)); color: hsl(var(--ink)); font-size: 1.3rem; font-weight: 700; cursor: pointer; box-shadow: 0 3px 0 hsl(36 30% 86%); }
+  .track { flex: 1; height: 7px; border-radius: 999px; background: hsl(36 30% 88%); position: relative; }
+  .track::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 46%; border-radius: 999px; background: hsl(var(--amber)); }
+  .track .knob { position: absolute; left: 46%; top: 50%; width: 18px; height: 18px; border-radius: 999px; background: #fff; border: 3px solid hsl(var(--amber)); transform: translate(-50%, -50%); }
+
+  .transport { width: 5.4rem; height: 5.4rem; border-radius: 999px; border: none; cursor: pointer; background: hsl(var(--strawberry)); color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 0 hsl(4 60% 48%); }
+  .transport svg { width: 2rem; height: 2rem; }
+
+  footer { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding-top: 0.5rem; }
+  .seg { display: inline-flex; background: hsl(var(--cream-card)); border-radius: 999px; padding: 0.3rem; gap: 0.2rem; box-shadow: inset 0 0 0 1.5px hsl(36 30% 88%); }
+  .seg button { border: none; background: transparent; color: hsl(var(--ink-soft)); font-size: 0.85rem; font-weight: 600; padding: 0.4rem 0.85rem; border-radius: 999px; cursor: pointer; font-family: Fredoka, sans-serif; }
+  .seg button.on { background: hsl(var(--amber)); color: hsl(28 40% 18%); }
+  .row { display: flex; align-items: center; gap: 0.8rem; }
+  .label { font-size: 0.74rem; letter-spacing: 0.04em; text-transform: uppercase; color: hsl(var(--ink-soft)); font-weight: 600; }
+  .vol { width: 140px; height: 7px; border-radius: 999px; background: hsl(36 30% 88%); position: relative; }
+  .vol::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 70%; border-radius: 999px; background: hsl(var(--mint)); }
+  .ad { margin-top: 0.5rem; width: 100%; max-width: 24rem; border: 2px dashed hsl(36 30% 84%); border-radius: var(--radius); padding: 0.9rem; text-align: center; color: hsl(var(--ink-soft)); font-size: 0.74rem; font-weight: 600; }
+  .tag { position: fixed; left: 12px; bottom: 10px; font-family: "JetBrains Mono", monospace; font-size: 0.65rem; color: hsl(var(--ink-soft)); }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <span class="brand">
+        <svg class="mascot-mark" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="18" fill="hsl(36 94% 56%)"/>
+          <path d="M20 20 38 11a18 18 0 0 1 0 18L20 20Z" fill="hsl(28 40% 18%)"/>
+          <circle cx="15" cy="14" r="2.4" fill="hsl(28 40% 18%)"/>
+        </svg>
+        <span class="wordmark">metro<span class="nom">nomnom</span></span>
+      </span>
+      <button class="calibrate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+        Calibrate
+      </button>
+    </header>
+
+    <main>
+      <div class="stage">
+        <div class="arc" id="arc">
+          <div class="readout" id="readout">
+            <div class="bpm">120</div>
+            <div class="bpm-label">BPM · 4/4</div>
+          </div>
+          <!-- hero beat-eater: round body, big open mouth, googly eyes -->
+          <svg class="hero" id="hero" viewBox="0 0 120 120">
+            <ellipse cx="60" cy="110" rx="34" ry="6" fill="hsl(36 30% 84%)"/>
+            <circle cx="60" cy="64" r="46" fill="hsl(36 94% 56%)"/>
+            <path d="M60 64 100 40 A46 46 0 0 1 100 88 Z" fill="hsl(4 78% 62%)"/>
+            <path d="M60 64 100 40 A46 46 0 0 1 100 88 Z" fill="hsl(28 40% 18%)" opacity="0.18"/>
+            <circle cx="44" cy="42" r="8" fill="#fff"/><circle cx="46" cy="43" r="4" fill="hsl(28 40% 18%)"/>
+            <circle cx="68" cy="40" r="8" fill="#fff"/><circle cx="70" cy="41" r="4" fill="hsl(28 40% 18%)"/>
+            <circle cx="34" cy="74" r="6" fill="hsl(4 78% 62%)" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="bpmctl">
+        <button class="round-sm">−</button>
+        <div class="track"><div class="knob"></div></div>
+        <button class="round-sm">+</button>
+      </div>
+
+      <button class="transport"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    </main>
+
+    <footer>
+      <div class="seg"><button>2/4</button><button>3/4</button><button class="on">4/4</button><button>6/8</button></div>
+      <div class="row">
+        <span class="label">Feel</span>
+        <div class="seg"><button class="on">♩</button><button>♪♪</button><button>3</button><button>16</button></div>
+        <span class="label">Swing</span>
+        <div class="vol"></div>
+      </div>
+      <div class="row">
+        <span class="label">Vol</span>
+        <div class="vol"></div>
+      </div>
+      <div class="ad">HOUSE AD · removed with “remove ads”</div>
+    </footer>
+  </div>
+  <div class="tag">Direction 3 — Playful Mascot</div>
+
+<script>
+  (function () {
+    var MAIN_LEN = 40, MAIN_LEN_ACCENT = 56, MAIN_W = 16, SUB_LEN = 18, SUB_W = 6;
+    var MARGIN = 8, SPACING = 22, MAX_SPAN = (265 * Math.PI) / 180, R_MIN = 64, R_MAX = 150;
+    var beats = 4, accents = [0], subsPerBeat = 2, currentBeat = 0, currentSub = 0, running = true;
+    var arc = document.getElementById('arc');
+    var width = Math.min(380, arc.clientWidth || 380);
+    var items = [];
+    for (var b = 0; b < beats; b++) {
+      items.push({ sub: false, accent: accents.indexOf(b) >= 0, on: running && currentBeat === b });
+      for (var s = 1; s < subsPerBeat; s++) items.push({ sub: true, accent: false, on: running && currentBeat === b && currentSub === s });
+    }
+    var n = items.length;
+    var R = Math.max(R_MIN, Math.min(R_MAX, width / 2 - MAIN_LEN_ACCENT - MARGIN));
+    var cx = width / 2, cy = MARGIN + R + MAIN_LEN_ACCENT;
+    var step = n > 1 ? SPACING / R : 0;
+    if ((n - 1) * step > MAX_SPAN) step = MAX_SPAN / (n - 1);
+    var k = n > 1 ? Math.max(0.4, Math.min(1, (step * R) / SPACING)) : 1;
+    var span = (n - 1) * step, start = -Math.PI / 2 - span / 2;
+    arc.style.height = (cy + 70) + 'px';
+    var AMBER = 'hsl(36 94% 56%)', STRAW = 'hsl(4 78% 62%)', INKSOFT = 'hsl(22 14% 70%)';
+    items.forEach(function (it, i) {
+      var a = start + i * step;
+      var len = (it.sub ? SUB_LEN : it.accent ? MAIN_LEN_ACCENT : MAIN_LEN) * k;
+      var w = (it.sub ? SUB_W : MAIN_W) * k;
+      var rad = R + len / 2;
+      var x = cx + rad * Math.cos(a), y = cy + rad * Math.sin(a);
+      var rot = (a * 180) / Math.PI + 90;
+      var el = document.createElement('div');
+      el.className = 'pill';
+      el.style.width = w + 'px'; el.style.height = len + 'px';
+      el.style.left = x + 'px'; el.style.top = y + 'px';
+      el.style.transform = 'translate(-50%,-50%) rotate(' + rot + 'deg)';
+      if (it.sub) { el.style.background = it.on ? STRAW : 'hsl(20 24% 20% / 0.16)'; }
+      else if (it.on) {
+        if (it.accent) { el.style.background = STRAW; el.style.boxShadow = '0 0 22px -2px ' + STRAW; }
+        else { el.style.background = AMBER; el.style.boxShadow = '0 0 18px -4px ' + AMBER; }
+      } else { el.style.background = it.accent ? 'hsl(4 78% 62% / 0.35)' : 'hsl(20 24% 20% / 0.18)'; }
+      arc.appendChild(el);
+    });
+    var ro = document.getElementById('readout');
+    ro.style.left = cx + 'px'; ro.style.top = (cy - 6) + 'px'; ro.style.transform = 'translate(-50%,-50%)';
+    var hero = document.getElementById('hero');
+    hero.style.left = cx + 'px';
+    hero.style.bottom = '-6px';
+  })();
+</script>
+</body>
+</html>

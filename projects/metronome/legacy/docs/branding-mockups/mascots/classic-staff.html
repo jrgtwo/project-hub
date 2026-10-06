@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>metronomnom — classic metronome + staff (kept upright)</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #14110f; color: hsl(38 30% 90%); font-family: Inter, system-ui, sans-serif; min-height: 100vh; padding-bottom: 3rem; }
+  header { padding: 1.4rem 1.6rem 0.4rem; }
+  h1 { font-family: Fredoka, sans-serif; font-size: 1.3rem; font-weight: 700; }
+  p.sub { color: hsl(30 10% 62%); font-size: 0.84rem; margin-top: 0.35rem; max-width: 74ch; line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem 1.6rem; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #1c1813; border: 1px solid #2c2620; border-radius: 16px; overflow: hidden; }
+  .name { font-family: Fredoka, sans-serif; font-weight: 600; font-size: 1rem; padding: 0.8rem 1rem 0.1rem; }
+  .vibe { font-size: 0.78rem; color: hsl(30 10% 60%); padding: 0.25rem 1rem 0.7rem; line-height: 1.4; min-height: 2.4em; }
+  .stage { display: grid; grid-template-columns: 1fr 1fr; }
+  .pane { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.2rem 0.5rem; }
+  .pane.light { background: hsl(38 34% 85%); }
+  .pane.dark { background: hsl(26 16% 13%); }
+  .pane .big { width: 138px; height: 115px; }
+  .markrow { display: flex; align-items: center; gap: 0.5rem; }
+  .markrow .mk { width: 44px; height: 37px; }
+  .markrow span { font-family: Fredoka, sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .pane.light .markrow span { color: hsl(24 32% 22%); }
+  .pane.light .markrow .nom { color: hsl(18 62% 48%); }
+  .pane.dark .markrow span { color: hsl(38 30% 90%); }
+  .pane.dark .markrow .nom { color: hsl(4 80% 64%); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>metronomnom — classic metronome, unchanged + a staff</h1>
+    <p class="sub">Same upright metronome as before (pendulum up through the body, mouth at the bottom). I only added a music staff with notes feeding into its mouth. Two layouts.</p>
+  </header>
+  <div class="grid" id="grid"></div>
+
+<script>
+  var INK = 'hsl(24 30% 18%)';
+  var AMBER = 'hsl(40 86% 58%)';
+  var AMBER_D = 'hsl(38 62% 46%)';
+  var BEAT = 'hsl(4 80% 62%)';
+  var MID = 'hsl(30 12% 52%)';
+  var MOUTH = 'hsl(20 40% 14%)';
+
+  function note(x, y, s, color) {
+    return `<g>
+      <ellipse cx="${x}" cy="${y}" rx="${5.4 * s}" ry="${4.3 * s}" transform="rotate(-18 ${x} ${y})" fill="${color}"/>
+      <rect x="${x + 3.7 * s}" y="${y - 15 * s}" width="${2 * s}" height="${13 * s}" rx="1" fill="${color}"/>
+    </g>`;
+  }
+  function staffLines(x1, x2, ys) {
+    return ys.map(function (y) { return `<line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${MID}" stroke-width="1.4"/>`; }).join('');
+  }
+  // The Classic metronome — IDENTICAL to before (centered ~50 in a 120-wide canvas).
+  function metroClassic() {
+    return `
+      <rect x="24" y="84" width="52" height="9" rx="4.5" fill="${AMBER_D}"/>
+      <path d="M30 86 L39 33 Q40 28 45 28 L55 28 Q60 28 61 33 L70 86 Z" fill="${AMBER}"/>
+      <line x1="50" y1="80" x2="61" y2="16" stroke="${AMBER_D}" stroke-width="3" stroke-linecap="round"/>
+      <rect x="56" y="42" width="9" height="8" rx="2" transform="rotate(13 60 46)" fill="${BEAT}"/>
+      <line x1="45" y1="38" x2="53" y2="38" stroke="${AMBER_D}" stroke-width="1.4" opacity="0.6"/>
+      <circle cx="44" cy="58" r="5" fill="#fff"/><circle cx="45.2" cy="59" r="2.5" fill="${INK}"/>
+      <circle cx="56" cy="58" r="5" fill="#fff"/><circle cx="57.2" cy="59" r="2.5" fill="${INK}"/>
+      <path d="M42 69 Q50 80 58 69 Q50 74 42 69 Z" fill="${MOUTH}"/>
+      <circle cx="40" cy="66" r="3" fill="${BEAT}" opacity="0.4"/>
+      <circle cx="60" cy="66" r="3" fill="${BEAT}" opacity="0.4"/>`;
+  }
+
+  var concepts = [
+    {
+      name: 'On the staff',
+      vibe: 'The metronome stands on a music staff; notes ride in from the right toward its mouth, the nearest one being chomped.',
+      svg: `
+        ${staffLines(8, 132, [60, 68, 76, 84])}
+        ${metroClassic()}
+        ${note(52, 74, 0.56, BEAT)}
+        ${note(78, 72, 0.82, BEAT)} ${note(98, 72, 0.82, BEAT)} ${note(118, 72, 0.82, BEAT)}`,
+    },
+    {
+      name: 'Feeding in',
+      vibe: 'Shorter staff just to the right, a little queue of notes sliding into the mouth. Cleaner / less busy.',
+      svg: `
+        ${staffLines(70, 130, [64, 72, 80])}
+        ${metroClassic()}
+        ${note(54, 74, 0.56, BEAT)}
+        ${note(84, 72, 0.82, BEAT)} ${note(104, 72, 0.82, BEAT)} ${note(122, 72, 0.82, BEAT)}`,
+    },
+  ];
+
+  function svgEl(inner, cls) {
+    return `<svg class="${cls}" viewBox="0 0 138 100" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`;
+  }
+  function pane(kind, inner) {
+    return `<div class="pane ${kind}">${svgEl(inner, 'big')}
+      <div class="markrow">${svgEl(inner, 'mk')}<span>metro<span class="nom">nomnom</span></span></div></div>`;
+  }
+  document.getElementById('grid').innerHTML = concepts.map(function (c) {
+    return `<div class="card"><div class="name">${c.name}</div><div class="vibe">${c.vibe}</div>
+      <div class="stage">${pane('light', c.svg)}${pane('dark', c.svg)}</div></div>`;
+  }).join('');
+</script>
+</body>
+</html>

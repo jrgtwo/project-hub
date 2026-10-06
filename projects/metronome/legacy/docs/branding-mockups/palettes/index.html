@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>metronomnom — playful palette options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #14110f; color: hsl(32 25% 92%); font-family: Inter, system-ui, sans-serif; min-height: 100vh; }
+  header { padding: 1.4rem 1.6rem 0.6rem; }
+  h1 { font-family: "JetBrains Mono", monospace; font-size: 1rem; font-weight: 600; letter-spacing: 0.04em; }
+  p.sub { color: hsl(30 10% 60%); font-size: 0.82rem; margin-top: 0.3rem; max-width: 70ch; line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1rem 1.6rem 2rem; }
+  @media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #1a1714; border: 1px solid #2a2521; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .meta { padding: 0.85rem 1rem; }
+  h2 { font-size: 0.95rem; font-weight: 600; }
+  .swatches { display: flex; gap: 6px; margin-top: 0.55rem; }
+  .sw { width: 22px; height: 22px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12); }
+  .desc { font-size: 0.78rem; color: hsl(30 10% 62%); margin-top: 0.55rem; line-height: 1.45; }
+  .open { display: inline-block; margin-top: 0.7rem; font-size: 0.76rem; color: hsl(32 25% 92%); text-decoration: none; border: 1px solid #2a2521; border-radius: 999px; padding: 0.3rem 0.7rem; }
+  .open:hover { border-color: hsl(36 92% 58%); }
+  .frame-wrap { border-top: 1px solid #2a2521; height: 760px; }
+  iframe { width: 100%; height: 100%; border: 0; display: block; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>metronomnom — playful palette options</h1>
+    <p class="sub">Same playful theme, three calmer palettes (the cream was too bright). All three now show the fixes: 3D pushable buttons, themed sliders (amber tempo / mint volume / white thumb), and the mascot peeking from below the tempo number with a legibility halo. Pick one to become the playful palette — end users won't choose colors; this is our call.</p>
+  </header>
+  <div class="grid">
+    <div class="card">
+      <div class="meta">
+        <h2>Muted Parchment</h2>
+        <div class="swatches">
+          <div class="sw" style="background:hsl(36 26% 90%)"></div>
+          <div class="sw" style="background:hsl(34 72% 54%)"></div>
+          <div class="sw" style="background:hsl(14 54% 52%)"></div>
+          <div class="sw" style="background:hsl(150 26% 46%)"></div>
+          <div class="sw" style="background:hsl(28 20% 22%)"></div>
+        </div>
+        <p class="desc">Warm oat base, softer amber, terracotta. Closest to the current look but dialed way down — cozy and calm.</p>
+        <a class="open" href="parchment.html" target="_blank">Open full-screen ↗</a>
+      </div>
+      <div class="frame-wrap"><iframe src="parchment.html" title="Muted Parchment"></iframe></div>
+    </div>
+    <div class="card">
+      <div class="meta">
+        <h2>Warm Dark Playful</h2>
+        <div class="swatches">
+          <div class="sw" style="background:hsl(26 16% 13%)"></div>
+          <div class="sw" style="background:hsl(38 92% 60%)"></div>
+          <div class="sw" style="background:hsl(4 80% 64%)"></div>
+          <div class="sw" style="background:hsl(158 42% 54%)"></div>
+          <div class="sw" style="background:hsl(36 30% 90%)"></div>
+        </div>
+        <p class="desc">Dim espresso base, cream text, candy accents. Fun and characterful but never bright — and visually close to the standard dark theme.</p>
+        <a class="open" href="dark.html" target="_blank">Open full-screen ↗</a>
+      </div>
+      <div class="frame-wrap"><iframe src="dark.html" title="Warm Dark Playful"></iframe></div>
+    </div>
+    <div class="card">
+      <div class="meta">
+        <h2>Retro 70s</h2>
+        <div class="swatches">
+          <div class="sw" style="background:hsl(38 34% 85%)"></div>
+          <div class="sw" style="background:hsl(42 70% 50%)"></div>
+          <div class="sw" style="background:hsl(18 62% 48%)"></div>
+          <div class="sw" style="background:hsl(70 32% 42%)"></div>
+          <div class="sw" style="background:hsl(24 32% 22%)"></div>
+        </div>
+        <p class="desc">Mustard, burnt orange, avocado on warm cream. Muted and vintage — the most distinctive character of the three.</p>
+        <a class="open" href="retro.html" target="_blank">Open full-screen ↗</a>
+      </div>
+      <div class="frame-wrap"><iframe src="retro.html" title="Retro 70s"></iframe></div>
+    </div>
+  </div>
+</body>
+</html>

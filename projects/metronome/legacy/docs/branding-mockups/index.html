@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>metronomnom — branding directions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #14110f; color: hsl(32 25% 92%); font-family: Inter, system-ui, sans-serif; min-height: 100vh; }
+  header { padding: 1.4rem 1.6rem 0.6rem; }
+  h1 { font-family: "JetBrains Mono", monospace; font-size: 1rem; font-weight: 600; letter-spacing: 0.04em; }
+  p.sub { color: hsl(30 10% 60%); font-size: 0.82rem; margin-top: 0.3rem; max-width: 60ch; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1rem 1.6rem 2rem; }
+  @media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #1a1714; border: 1px solid #2a2521; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .card .meta { padding: 0.85rem 1rem; }
+  .card h2 { font-size: 0.95rem; font-weight: 600; }
+  .card .tone { font-size: 0.72rem; color: hsl(36 92% 58%); text-transform: uppercase; letter-spacing: 0.14em; margin-top: 0.15rem; }
+  .card .desc { font-size: 0.78rem; color: hsl(30 10% 62%); margin-top: 0.5rem; line-height: 1.45; }
+  .frame-wrap { position: relative; background: #000; border-top: 1px solid #2a2521; height: 720px; }
+  iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .open { display: inline-block; margin-top: 0.7rem; font-size: 0.76rem; color: hsl(32 25% 92%); text-decoration: none; border: 1px solid #2a2521; border-radius: 999px; padding: 0.3rem 0.7rem; }
+  .open:hover { border-color: hsl(36 92% 58%); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>metronomnom — three branding directions</h1>
+    <p class="sub">Same metronome, three takes on the playful-vs-pro tension. Scroll each panel; open any one full-screen to judge it on its own. Pick one (or a blend) and we'll build the wordmark + palette into the app.</p>
+  </header>
+  <div class="grid">
+    <div class="card">
+      <div class="meta">
+        <h2>1 · Pro Instrument</h2>
+        <div class="tone">Restrained</div>
+        <p class="desc">Exact current dark aesthetic. The only wink: the wordmark's o's become small amber beat-dots. No mascot — tool first. Ships within existing lib tokens.</p>
+        <a class="open" href="1-pro.html" target="_blank">Open full-screen ↗</a>
+      </div>
+      <div class="frame-wrap"><iframe src="1-pro.html" title="Pro Instrument"></iframe></div>
+    </div>
+    <div class="card">
+      <div class="meta">
+        <h2>2 · Balanced Wink</h2>
+        <div class="tone">Middle</div>
+        <p class="desc">Dark pro base, warmed accent. A tiny mascot mark by the wordmark, the nom's o's as chomping mouths, and a "nom" pulse on the downbeat. Mostly ships within existing tokens.</p>
+        <a class="open" href="2-balanced.html" target="_blank">Open full-screen ↗</a>
+      </div>
+      <div class="frame-wrap"><iframe src="2-balanced.html" title="Balanced Wink"></iframe></div>
+    </div>
+    <div class="card">
+      <div class="meta">
+        <h2>3 · Playful Mascot</h2>
+        <div class="tone">Lean playful</div>
+        <p class="desc">Warm cream surface, food-ish accents, rounded type, a hero beat-eater. Most differentiated — but needs new lib color tokens (separate repo) before it can ship faithfully.</p>
+        <a class="open" href="3-playful.html" target="_blank">Open full-screen ↗</a>
+      </div>
+      <div class="frame-wrap"><iframe src="3-playful.html" title="Playful Mascot"></iframe></div>
+    </div>
+  </div>
+</body>
+</html>

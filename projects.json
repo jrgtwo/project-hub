@@ -1,0 +1,14 @@
+{
+  "projects": [
+    {
+      "name": "metronome",
+      "identity": "github.com/jrgtwo/metronome",
+      "subdir": null
+    },
+    {
+      "name": "jrg-skills",
+      "identity": "github.com/jrgtwo/jrg-skills",
+      "subdir": null
+    }
+  ]
+}
