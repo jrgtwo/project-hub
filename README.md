@@ -1,4 +1,4 @@
-# jrg hub
+# Project Hub
 
 Tickets and knowledge for every project, in one repo. Managed by the jrg skills (`/jrg-start`, `/jrg-projects`).
 
