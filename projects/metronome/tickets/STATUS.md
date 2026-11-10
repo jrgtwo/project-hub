@@ -40,4 +40,4 @@ First `todo` in working order whose dependencies are done. Check its milestone's
 
 - [Deferred](deferred/index.md): 0 entries, last groomed never
 - [Backlog](backlog/index.md): 0 entries, last groomed never
-- [Pre-migration](pre-migration/index.md): 0 entries, last groomed never
+- [Pre-migration](pre-migration/index.md): 0 entries, last groomed 2026-11-09

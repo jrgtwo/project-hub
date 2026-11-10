@@ -5,7 +5,7 @@
 - **What:** every work item imported, unverified, from the docs this workflow replaced — shipped work, queues, ideas, known issues, parked items.
 - **Add when:** only during migration. Nothing new is added here afterwards.
 - **Remove when:** groomed — moved to history, a ticket, the backlog or deferred, or dropped. When this list is empty, delete the folder and its row in the tickets index.
-- **Last groomed:** never.
+- **Last groomed:** 2026-11-09.
 
 Entry format:
 
@@ -20,18 +20,6 @@ Entry format:
 ```
 
 Entries are ordered by old state: queued and parked work first, then known issues, ideas, shipped history, dropped. Old item IDs (`FT-7`, `CQ-4`, …) are kept in headings because they are how the old docs cross-reference each other.
-
-## FlexOffers affiliate: verify the site, await approval, then wire the affiliate link
-
-- From:
-  - `memory/ads-flexoffers.md` lines 10–27 (memory folder; not moved)
-  - `.claude/working-docs/current-status.md` lines 109
-  - `docs/STATUS.md` lines 140–146, 169–176
-  - (repo docs now in `jrg/legacy/`)
-- Old state: parked
-- Imported: 2026-10-03
-
-Signed up 2026-06-26; `fo-verify` meta tag added to `index.html`; after redeploy, click "Verify Website". Approval expected ~2026-06-30. Once approved, set the house-ad `href`/`cta` in `src/ads.config.ts`. (Memory says in progress; the status docs say parked. The footer ad slot was later removed in the single-screen redesign.)
 
 ## Commit the session's work; redeploy so the fo-verify tag goes live
 
