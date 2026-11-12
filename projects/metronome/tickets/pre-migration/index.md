@@ -21,21 +21,6 @@ Entry format:
 
 Entries are ordered by old state: queued and parked work first, then known issues, ideas, shipped history, dropped. Old item IDs (`FT-7`, `CQ-4`, …) are kept in headings because they are how the old docs cross-reference each other.
 
-## SEO-12 — Google Search Console: verify domain + submit sitemap
-
-- From:
-  - `.claude/working-docs/prioritized-work.md` lines 69
-  - `docs/improvement-roadmap.md` lines 82, 106
-  - `.claude/working-docs/current-tasks.md` lines 5–6
-  - `.claude/working-docs/current-status.md` lines 65–66, 108–109
-  - `docs/superpowers/specs/2026-07-02-traffic-experiment-roadmap-design.md` lines 68–69
-  - `docs/app-launch-runbook.md` lines 78
-  - (repo docs now in `jrg/legacy/`)
-- Old state: queued
-- Imported: 2026-10-03
-
-Search Console via DNS/HTML verification, then submit `sitemap.xml` — the organic-search surface (impressions/clicks/queries). P1, the only remaining P1. The traffic spec's Phase 0 absorbs it; the runbook's measure loop lists it.
-
 ## SEO P0 cluster is the recommended next task
 
 - From: `.claude/working-docs/memory.md` lines 23–24 (now in `jrg/legacy/`)

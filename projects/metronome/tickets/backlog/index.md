@@ -21,4 +21,10 @@ Entry format:
 
 ## Entries
 
-None yet.
+## Verify metronomnom.com in Google Search Console and submit the sitemap
+
+- Added: 2026-11-11 (groomed from pre-migration; old ID SEO-12)
+- Type: chore
+- Likely home: future initiative (launch / traffic measurement)
+
+Verify the domain (DNS or HTML tag/file) and submit `https://metronomnom.com/sitemap.xml` to get organic impressions, clicks and queries. As of 2026-11-11 the site is live, `public/sitemap.xml` and `public/robots.txt` exist, and nothing in the repo shows verification (no `google-site-verification` tag or file). The playbook step is in `knowledge/launch.md` (Measure and decide).
