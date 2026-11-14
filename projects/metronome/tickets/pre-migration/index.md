@@ -21,14 +21,6 @@ Entry format:
 
 Entries are ordered by old state: queued and parked work first, then known issues, ideas, shipped history, dropped. Old item IDs (`FT-7`, `CQ-4`, …) are kept in headings because they are how the old docs cross-reference each other.
 
-## SEO P0 cluster is the recommended next task
-
-- From: `.claude/working-docs/memory.md` lines 23–24 (now in `jrg/legacy/`)
-- Old state: queued
-- Imported: 2026-10-03
-
-Triage call (2026-06-26): the SEO P0 cluster is the recommended next task.
-
 ## Verify domain availability for metronomnom.com before purchase
 
 - From: `docs/branding-naming.md` lines 10–18 (now in `jrg/legacy/`)
